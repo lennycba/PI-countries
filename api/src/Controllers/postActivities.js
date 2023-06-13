@@ -4,6 +4,7 @@ const { Activity } = require('../db');
 const postActivity = async (req,res)=>{
     try {
         const{name,dificulty,duration,season,countries}=req.body;
+        console.log(name,dificulty,duration,season,countries)
         if(!name || !dificulty || !duration || !season || !countries)
         {
             throw Error('faltan datos necesarios para crear la actividad')
