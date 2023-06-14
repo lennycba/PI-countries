@@ -8,6 +8,7 @@ import {
     ORDER_BY_POP,
     SEARCH_BY_NAME,
     NEW_ACTIVITY,
+    GET_COUNTRY_BY_ID,
 } from './types';
 
 
@@ -15,6 +16,7 @@ const initialState = {
     countries:[],
     activities:[],
 
+    detailCountry:[],
     continents: [],
     filteredCountries: [],
 }
@@ -113,6 +115,12 @@ const rootReducer = ( state=initialState, actions) =>{
                 return{
                     ...state.countries
                 }
+            }
+
+        case GET_COUNTRY_BY_ID:
+            const country = actions.payload
+            return {
+                ...state,detailCountry: country
             }
 
         case NEW_ACTIVITY:

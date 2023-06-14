@@ -1,20 +1,19 @@
 import style from './Card.module.css';
+import { Link } from 'react-router-dom';
+import ROUTES from '../../helpers/routes.helpers';
 
-const Card = ({name,flag,continent,capital,activities})=>{
-console.log(capital)
+const Card = ({name,flag,continent,capital,ID})=>{
     return(
        
         <div className={style.card}>
+            <Link to={`${ROUTES.DETAIL}/${ID}`}>
             <img className={style.img} src={flag}/>
             <div className={style.name}>
                 <h2>{name}</h2>
             </div>
             <h3>{capital}</h3>
             <h3>{continent}</h3>
-            {/* <h3>{subregion}</h3>
-            <h3>{area}</h3>
-            <h3>{population}</h3> */}
-            {/* <div>{activities?.flat().map((act,index) => <h4 key={index} >{act}</h4>)}</div> */}
+            </Link>
         </div>
 
         

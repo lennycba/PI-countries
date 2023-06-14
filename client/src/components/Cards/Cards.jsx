@@ -112,6 +112,7 @@ const Cards = () => {
             filteredCountries?.map((count)=>{
                 return <Card 
                 key = {count.ID}
+                ID = {count.ID}
                 name = {count.name}
                 flag = {count.flag}
                 continent = {count.continent}
@@ -122,6 +123,7 @@ const Cards = () => {
             countries?.map((count)=>{
                 return <Card 
                 key = {count.ID}
+                ID = {count.ID}
                 name = {count.name}
                 flag = {count.flag}
                 continent = {count.continent}

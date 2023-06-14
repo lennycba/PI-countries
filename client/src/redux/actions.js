@@ -9,6 +9,7 @@ import {
     ORDER_BY_POP,
     SEARCH_BY_NAME,
     NEW_ACTIVITY,
+    GET_COUNTRY_BY_ID,
 } from './types';
 
 
@@ -85,5 +86,12 @@ export const addNewActivity = (newActivity) => {
         const createActivity = await axios.post('http://localhost:3001/activities',newActivity)
         dispatch({type:NEW_ACTIVITY});
     
+    }
+}
+
+export const getCountryById = (id) =>{
+    return async function (dispatch){
+            let country =  await axios.get(`http://localhost:3001/countries/${id}`)
+            dispatch({type:GET_COUNTRY_BY_ID,payload:country.data})
     }
 }

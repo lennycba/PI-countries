@@ -46,9 +46,9 @@ function Form() {
       season: newActivity.season,
       countries: selectedCountries,
     };
-    console.log(activityCreated);
+    window.alert('Actividad creada correctamente')
     dispatch(addNewActivity(activityCreated))
-    
+
   };
 
   return (
@@ -73,13 +73,8 @@ function Form() {
             <div className={style.dificulty}>
               <label>Dificulty: </label>
               <br />
-              <select name="dificulty" onChange={handleChange}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+              <label>{newActivity.dificulty}</label><br />
+              <input name='dificulty' type='range' min='1' max='5' step='1' onChange={handleChange}/>
             </div>
             <div className={style.duration}>
               <label>Duration: </label>

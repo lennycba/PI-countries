@@ -3,6 +3,7 @@ import {Route,useLocation} from 'react-router-dom';
 import { useEffect } from 'react';
 import Home from './views/Home/Home';
 import Form from './views/Form/Form';
+import Detail from './views/Detail/Detail';
 import ROUTES from './helpers/routes.helpers'
 import NavBar from './components/NavBar/NavBar';
 import Landing from './views/Landing/Landing';
@@ -23,6 +24,7 @@ const dispatch = useDispatch()
         <Route exact path={ROUTES.LANDING} render={ () =>  <Landing /> } />
         <Route exact path={ROUTES.HOME} render={ () =>  <Home /> } />
         <Route exact path={ROUTES.FORM} render={ () => <Form /> } />
+        <Route exact path={`${ROUTES.DETAIL}/:id`} render={ () => <Detail />} />
  
     </div>
   );

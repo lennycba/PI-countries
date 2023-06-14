@@ -7,4 +7,5 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_POP = 'ORDER_BY_POP';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const NEW_ACTIVITY = 'NEW_ACTIVITY';
+export const GET_COUNTRY_BY_ID = 'GET_COUNTRY_BY_ID';
 

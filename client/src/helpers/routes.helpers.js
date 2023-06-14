@@ -2,6 +2,7 @@ const ROUTES = {
     HOME:'/home',
     LANDING:'/',
     FORM:'/form',
+    DETAIL:'/detail',
 }
 
 
