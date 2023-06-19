@@ -77,13 +77,14 @@ export const searchByName = (search) =>{
         const bddInfo = await axios.get(`http://localhost:3001/countries?name=${search}`)
         const countries = bddInfo.data;
         dispatch({type:SEARCH_BY_NAME,payload:countries});
+        
     }
 }
 
 
 export const addNewActivity = (newActivity) => {
     return async function (dispatch){
-        const createActivity = await axios.post('http://localhost:3001/activities',newActivity)
+        await axios.post('http://localhost:3001/activities',newActivity)
         dispatch({type:NEW_ACTIVITY});
     
     }

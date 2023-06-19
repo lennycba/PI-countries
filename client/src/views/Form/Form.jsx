@@ -3,6 +3,7 @@ import style from "./Form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { addNewActivity } from "../../redux/actions";
+import Validation from "./Validation";
 
 function Form() {
   const dispatch = useDispatch();
@@ -12,9 +13,12 @@ function Form() {
   const [newActivity, setNewActivity] = useState({
     name: "",
     dificulty: "",
-    duration: "",
+    duration: "1",
     season: "",
   });
+
+
+  const [errors,setErrors] = useState({})
 
   const handleCheck = (e) => {
     const value = e.target.value;
@@ -34,6 +38,7 @@ function Form() {
       ...newActivity,
       [property]: value,
     });
+    setErrors(Validation({...newActivity,[property]:value}))
   };
 
   const handleSubmit = (e) => {
@@ -46,15 +51,20 @@ function Form() {
       season: newActivity.season,
       countries: selectedCountries,
     };
-    window.alert('Actividad creada correctamente')
-    dispatch(addNewActivity(activityCreated))
+
+    if(!Object.values(errors).length){
+      window.alert('Actividad creada correctamente')
+      /* dispatch(addNewActivity(activityCreated)) */
+    }else{
+      window.alert('Upss.. seems you forgot some information')
+    }
 
   };
 
   return (
     <div className={style.formContainer}>
-      <div>
-        <div>
+      <div className={style.formDiv}>
+        <div className={style.title}>
           <label>Bienvenido al formulario para crear una nueva actividad</label>
           <br />
           <label>Por favor complete los datos requeridos</label>
@@ -69,21 +79,24 @@ function Form() {
                 placeholder="Activity name"
                 onChange={handleChange}
               ></input>
+              {errors.name && <div className={style.bubble}> <p>{errors.name}</p> </div>}
             </div>
             <div className={style.dificulty}>
               <label>Dificulty: </label>
               <br />
-              <label>{newActivity.dificulty}</label><br />
-              <input name='dificulty' type='range' min='1' max='5' step='1' onChange={handleChange}/>
+              <label>{newActivity.dificulty!== '' ? newActivity.dificulty : '1'}</label><br />
+              <input name='dificulty' type='range' min='1' max='5' step='1' defaultValue={'1'} onChange={handleChange}/>
             </div>
             <div className={style.duration}>
               <label>Duration: </label>
               <br />
               <input
                 name="duration"
+                type='number'
                 placeholder="Hours"
                 onChange={handleChange}
               ></input>
+              {errors.duration && !errors.name && <div className={style.bubble}> <p>{errors.duration}</p> </div>}
             </div>
             <div className={style.season}>
               <label>Season: </label>
@@ -105,6 +118,8 @@ function Form() {
                   <input name="season" value='Verano' onChange={handleChange} type="radio" />
                   <label>Verano</label>
                 </div>
+                <div>
+              </div>
               </div>
             </div>
             <div className={style.countries}>

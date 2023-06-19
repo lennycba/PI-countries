@@ -15,7 +15,6 @@ const getCountriesByName = async (req,res)=>{
                     }
                 }
             });
-            console.log('soy name, vengo desde el back',name)
         }else{
             countries = await Country.findAll({
                 where:{
@@ -33,10 +32,10 @@ const getCountriesByName = async (req,res)=>{
             })
         }
 
-        
-        if(countries.length < 1) throw Error('no se encontró el pais buscado')
+        if(countries.length === 0) throw Error('no se encontró el pais buscado')
         res.status(200).json(countries)
     } catch (error) {
+        console.log(error.message)
         res.status(404).json({error:error.message});
     }
 }

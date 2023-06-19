@@ -3,6 +3,8 @@ import style from './Cards.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
 import {filterByContinent,orderByName,orderByPop,filterByActivities} from '../../redux/actions';
+import left from '../../images/iconos/arrow-left.png'
+import right from '../../images/iconos/arrow-right.png'
 
 const Cards = () => {
     const countries = useSelector((state)=>state.countries)
@@ -13,6 +15,7 @@ const Cards = () => {
     const [selectedActivity, setSelectedActivity] = useState('')
     const [orderName,setOrderName] = useState('')
     const [orderPop,setOrderPop] = useState('')
+    const [pages,setPages] = useState(1)
     const dispatch = useDispatch();
     
 
@@ -62,45 +65,55 @@ const Cards = () => {
     },[orderPop])
 
     //----------------------------------------------------------------------
+     //paginado------------------------------------------------------------
+    const goPrevious = () =>{
+        if(pages > 1) setPages(pages -1)
+    }
 
-    
+    const goNext = () =>{
+        if(pages < Math.ceil(countries.length/15)) setPages(pages +1)
+    }
 
 
     return (
         <div className={style.cardsContainer} >
+            <div className={style.pagination}>
+                <button disabled={pages === 1} onClick={goPrevious}><img src={left}/></button>
+                <span>Page: {pages}</span>
+                {filteredCountries.length? <button disabled={pages === Math.ceil(filteredCountries.length/15)} onClick={goNext}><img src={right}/></button>:
+                <button disabled={pages === Math.ceil(countries.length/15)} onClick={goNext}><img src={right}/></button>
+                }
+            </div> 
             <div className={style.filtersAndOrders} >
 
             {/* filtro por continente */}
             <div className={style.fContinent} >
-            <label>Filter By Continent: </label>
             <select onChange={handleChangeCont} > 
+                <option disabled selected>Filter by Continent...</option>
                 <option value="All">All</option>
                 {continents?.map((continent,index) => <option key={index} value={continent}>{continent}</option>)}
             </select>
             </div>
             {/* filtro por actividad */}
             <div className={style.fContinent} >
-            <label>Filter By Activity: </label>
             <select onChange={handleChangeAct} > 
-                <option value="">Select</option>
+                <option disabled selected>Filter by Activity...</option>
                 <option value="All">All</option>
                 {activities?.map((act,index) => <option key={index} value={act.name}>{act.name}</option>)}
             </select>
             </div>
                 {/* ordenar por nombre */}
                 <div>
-                    <label>Order By Name: </label>
                     <select onChange={handleOrderName} >
-                        <option value=''>Select</option>
+                        <option disabled selected>Order by Name...</option>
                         <option value='Upward'>Upward</option>
                         <option value='Falling'>Falling</option>
                     </select>
                 </div>
                 {/* ordenar por poblacion */}
                 <div>
-                    <label>Order By Population: </label>
                     <select onChange={handleOrderPop} >
-                        <option value=''>Select</option>
+                        <option disabled selected>Order by Population...</option>
                         <option value='Upward'>Upward</option>
                         <option value='Falling'>Falling</option>
                     </select>
@@ -109,7 +122,7 @@ const Cards = () => {
 			<div className={style.cards}>     
             {
                 filteredCountries?.length?
-            filteredCountries?.map((count)=>{
+            filteredCountries.slice(pages * 15 -15, pages * 15).map((count)=>{
                 return <Card 
                 key = {count.ID}
                 ID = {count.ID}
@@ -120,7 +133,7 @@ const Cards = () => {
                 
                 />
             }):
-            countries?.map((count)=>{
+            countries.slice(pages * 15 -15, pages * 15).map((count)=>{
                 return <Card 
                 key = {count.ID}
                 ID = {count.ID}
@@ -131,6 +144,13 @@ const Cards = () => {
                 />
             })}
 			</div>
+            <div className={style.pagination}>
+                <button disabled={pages === 1} onClick={goPrevious}><img src={left}/></button>
+                <span>Page: {pages}</span>
+                {filteredCountries.length? <button disabled={pages === Math.ceil(filteredCountries.length/15)} onClick={goNext}><img src={right}/></button>:
+                <button disabled={pages === Math.ceil(countries.length/15)} onClick={goNext}><img src={right}/></button>
+                }
+            </div> 
         </div>
     )
 }

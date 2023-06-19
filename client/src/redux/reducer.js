@@ -106,16 +106,15 @@ const rootReducer = ( state=initialState, actions) =>{
 
         case SEARCH_BY_NAME:
             const search = actions.payload;
-            
             if (search.length){
                 return{
                     ...state,filteredCountries:search
                 }
-            }else{
+            }/* else{
                 return{
                     ...state.countries
                 }
-            }
+            } */
 
         case GET_COUNTRY_BY_ID:
             const country = actions.payload
