@@ -2,7 +2,6 @@ import React from "react";
 import style from "./Form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { addNewActivity } from "../../redux/actions";
 import Validation from "./Validation";
 
 function Form() {
@@ -11,10 +10,10 @@ function Form() {
   const countries = useSelector((state) => state.countries);
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [newActivity, setNewActivity] = useState({
-    name: "",
-    dificulty: "",
-    duration: "1",
-    season: "",
+    name:' ',
+    dificulty:' ',
+    duration:' ',
+    season:' ',
   });
 
 
@@ -24,12 +23,17 @@ function Form() {
     const value = e.target.value;
     setSelectedCountries((prevSelectedCountries) => {
       if (prevSelectedCountries.includes(value)) {
-        return prevSelectedCountries.filter((country) => country !== value);
+        const postSelectedCountries = prevSelectedCountries.filter((country) => country !== value)
+        setErrors(Validation(newActivity,postSelectedCountries))
+        /* return prevSelectedCountries.filter((country) => country !== value) */;
+        return postSelectedCountries
       } else {
+        setErrors(Validation(newActivity,[...prevSelectedCountries,value]))
         return [...prevSelectedCountries, value];
       }
     });
   };
+
 
   const handleChange = (e) => {
     const property = e.target.name;
@@ -38,8 +42,9 @@ function Form() {
       ...newActivity,
       [property]: value,
     });
-    setErrors(Validation({...newActivity,[property]:value}))
+    setErrors(Validation({...newActivity,[property]:value},selectedCountries))
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,14 +57,16 @@ function Form() {
       countries: selectedCountries,
     };
 
-    if(!Object.values(errors).length){
-      window.alert('Actividad creada correctamente')
+    if(!Object.values(errors).length && activityCreated.name !== ' '){
+      window.alert('Activity succesfully created')
       /* dispatch(addNewActivity(activityCreated)) */
     }else{
       window.alert('Upss.. seems you forgot some information')
     }
 
   };
+
+  
 
   return (
     <div className={style.formContainer}>
@@ -79,7 +86,7 @@ function Form() {
                 placeholder="Activity name"
                 onChange={handleChange}
               ></input>
-              {errors.name && <div className={style.bubble}> <p>{errors.name}</p> </div>}
+              {errors.name && newActivity.name !== ' ' && <div className={style.bubble}> <p>{errors.name}</p> </div>}
             </div>
             <div className={style.dificulty}>
               <label>Dificulty: </label>
@@ -94,9 +101,10 @@ function Form() {
                 name="duration"
                 type='number'
                 placeholder="Hours"
+                min= '1'
                 onChange={handleChange}
               ></input>
-              {errors.duration && !errors.name && <div className={style.bubble}> <p>{errors.duration}</p> </div>}
+              {errors.duration && newActivity.duration !== ' ' && <div className={style.bubble}> <p>{errors.duration}</p> </div>}
             </div>
             <div className={style.season}>
               <label>Season: </label>
@@ -121,6 +129,7 @@ function Form() {
                 <div>
               </div>
               </div>
+              {errors.season && errors.season!==' ' && <div className={style.bubble}> <p>{errors.season}</p> </div>}
             </div>
             <div className={style.countries}>
               <label>Country or Countries: </label>
@@ -145,6 +154,7 @@ function Form() {
                 })}
               </div>
             </div>
+            {errors.countries && !errors.duration && <div className={style.bubble}> <p>{errors.countries}</p> </div>}
             <button className={style.formButton} type="submit">
               Crear
             </button>

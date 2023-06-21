@@ -2,7 +2,7 @@ import style from './Card.module.css';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../helpers/routes.helpers';
 
-const Card = ({name,flag,continent,capital,ID})=>{
+const Card = ({name,flag,continent,ID})=>{
     return(
        
         <div className={style.card}>
