@@ -16,7 +16,9 @@ const SearchBar = () => {
   }
   
   useEffect(()=>{
-    dispatch(searchByName(search))
+    if(search.length>0){
+      dispatch(searchByName(search))
+    }
   },[search])
 
   return (

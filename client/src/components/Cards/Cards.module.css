@@ -1,32 +1,40 @@
 
 
 .cardsContainer{
+    margin-top: 100px;
     display:flex;
     flex-direction: column;
     margin: auto auto;
     align-items: center;
     width: 90%;
     height:100%;
+    /* font-family: 'Caveat', cursive; */
+    font-family: 'Rock Salt', cursive;
+    font-size: 12px;
 }
 
 .filtersAndOrders{
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: -50px;
     width: 50%;
-    height: 45px;
+    height: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-family: 'Caveat', cursive;
 }
 
 .filtersAndOrders select{
     width: 200px;
-    height: 25px;
+    height: 30px;
     border-radius: 10px;
-    background-color: rgba(230, 231, 232, 0.766);
-    font-size: 15px;
+    background-image: url('../../images/fondos/wood\ 1.jpg');
+    /* background-color: rgba(220, 151, 14, 0.766); */
+    font-size: 22px;
     font-weight:bold;
     text-align: center;
+    font-family: 'Caveat', cursive;
+    color: rgb(209, 209, 201);
 }
 
 .cards{
@@ -46,10 +54,11 @@
     width: 20%;
     padding: 5px;
     justify-content: space-around;
-    background-color: rgba(32, 30, 30, 0.65);
-    border: 2px solid rgba(254, 254, 254, 0.717);
+    /* background-color: rgba(130, 74, 6, 0.873); */
+    background-image: url('../../images/fondos/wood\ 1.jpg');
+    border: 2px solid rgba(183, 147, 100, 0.979);
     border-radius: 15px;
-
+    font-family: 'Caveat', cursive;
 }
 
 .pagination button{
@@ -64,15 +73,16 @@
 }
 
 .pagination span{
-    background-color: rgba(254, 254, 254, 0.717);
+    background-color: rgba(225, 210, 181, 0.823);
     padding: 10px;
     border-radius: 5px;
-    color: rgb(17, 17, 17);
-    font-size: 16px;
+    color: rgb(47, 26, 2);
+    font-size: 21px;
+    font-family: 'Caveat', cursive;
     font-weight: bold;
 }
 
 .pagination img{
     width: 35px;
-    color: black;
+    color: rgb(255, 255, 255);
 }

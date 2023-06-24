@@ -17,8 +17,8 @@
     width: 15vw;
     height:43vh;
     border-radius:20px;
-    background-color: rgba(32, 30, 30, 0.65);
-    border: 3.5px solid #dbd9d294;
+    background-color: rgba(151, 83, 10, 0.582);
+    border: 3.5px solid #2e1804cb;
     transition: 0.3s ease-in-out;
 }
 
@@ -27,14 +27,14 @@
 -webkit-box-shadow: -1px -1px 16px 4px rgba(227,224,216,0.75);
 -moz-box-shadow: -1px -1px 16px 4px rgba(227,224,216,0.75);
     scale: 1.05;
-    background-color: rgba(228, 224, 218, 0.428);
+    background-color: rgba(228, 224, 218, 0.405);
     /* border: 3.5px solid #ffc002; */
     border: 3.5px solid #020b25b5;
     filter: brightness(1.2);
 }
 
 .link{
-    color: rgb(179, 192, 195);
+    color: rgb(0, 0, 0);
     transition: 0.35s ease-in-out;
 }
 
@@ -47,12 +47,13 @@
     height: 50px;
     position: absolute;
     top: 60%;
+    font-size: 12px;
 }
 
 .continent{
     width: 100%;
     position: absolute;
-    bottom: 15px;
+    bottom: 8px;
 
 }
 
@@ -62,7 +63,7 @@
     width: 200px; 
     height: 200px; 
     object-fit: cover;
-    border: 3.5px solid #dbd9d294;
+    border: 3.5px solid #22120494;
     transition: 0.3s ease-in-out;
 }
 

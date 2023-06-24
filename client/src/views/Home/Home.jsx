@@ -1,20 +1,13 @@
 import React from 'react'
 import Cards from '../../components/Cards/Cards';
-import {useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import {getActivities,getContinents} from '../../redux/actions';
+import style from './Home.module.css'
+
 
 
 function Home() {
-  const dispatch = useDispatch();
-  
-  useEffect(()=>{
-    dispatch(getActivities())
-    dispatch(getContinents())
-  },[dispatch])
 
   return (
-    <div>
+    <div className={style.cont}>
       <Cards />
     </div>
   )

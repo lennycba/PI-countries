@@ -19,18 +19,23 @@ const initialState = {
     detailCountry:[],
     continents: [],
     filteredCountries: [],
+    sContinent: '',
+    sActivity:''
 }
 
 
 
 
-const rootReducer = ( state=initialState, actions) =>{
-    let countriesToFilter = [...state.filteredCountries]
-    
+const rootReducer = ( state = initialState, actions) =>{
+
     switch (actions.type) {
         case GET_COUNTRIES:
+            
             return {
-                ...state,countries:actions.payload
+                ...state,
+                countries:actions.payload,
+                filteredCountries:actions.payload,
+                
             }
         case GET_ACTIVITIES:
             return {
@@ -39,32 +44,42 @@ const rootReducer = ( state=initialState, actions) =>{
         case FILTER_BY_CONTINENT:
                 const continent = actions.payload;
                 if(continent === 'All'){
-                    return{
-                        ...state,filteredCountries: state.countries,
-                    }
+                    return {
+                        ...state,
+                        filteredCountries : [...state.countries]
+                     }
+                    
                 }else{
-                const filteredCountries = state.countries.filter((count) => count.continent === actions.payload)
-                return {
-                    ...state,filteredCountries: filteredCountries
-                    }
+                const filteredCount = state.filteredCountries.filter((count) => count.continent === continent)
+                return {...state,filteredCountries: filteredCount}
                 }
         
         case FILTER_BY_ACTIVITIES:
                 const activity = actions.payload;
-                    if(activity === 'All'){
-                        const filtered = state.countries.filter((count)=> count.Activities.length > 0)
+
+                    if(activity === 'none' || activity === ''){
+
                         return{
-                            ...state,filteredCountries: filtered,
+                            ...state,filteredCountries:[...state.countries]
+                        }
+                    }
+
+                    if(activity === 'All'){
+                            let filtered = state.filteredCountries.filter((count)=> count.Activities.length > 0)
+                        return{
+                            ...state,filteredCountries: filtered
                         }
                     }else{
                         const activityComplete = state.activities.filter(act => act.name === activity)
                         const countriesRaw = activityComplete[0]?.Countries
                         const cleanNames = countriesRaw?.map(c => c.name)
-
                         const filtered = [];
                       
                         cleanNames?.forEach((country)=>{
-                            filtered.push(state.countries.filter(count => count.name === country)[0])
+                            let result = state.filteredCountries.filter(count => count.name === country)[0]
+                            if(result !== undefined){
+                                filtered.push({...result})
+                            }
                         })
                         return{
                           ...state,filteredCountries:filtered
@@ -77,10 +92,8 @@ const rootReducer = ( state=initialState, actions) =>{
                 }
         case ORDER_BY_NAME:
             const orderN = actions.payload;
-            if(countriesToFilter.length <1 ){
-                countriesToFilter = [...state.countries]
-            }
-            const sortedN = countriesToFilter.sort((a, b) => {
+            
+            const sortedN = state.filteredCountries.sort((a, b) => {
                 if (orderN === 'Upward') {
                   return a.name.localeCompare(b.name); // Orden ascendente
                 } else {
@@ -91,10 +104,7 @@ const rootReducer = ( state=initialState, actions) =>{
             
         case ORDER_BY_POP:
             const orderP = actions.payload;
-                if(countriesToFilter.length <1 ){
-                    countriesToFilter = [...state.countries]
-                }
-                const sortedP = countriesToFilter.sort((a, b) => {
+                const sortedP = state.filteredCountries.sort((a, b) => {
                     if (orderP === 'Upward') {
                       return a.population - b.population; // Orden ascendente
                     } else {
@@ -110,16 +120,12 @@ const rootReducer = ( state=initialState, actions) =>{
                 return{
                     ...state,filteredCountries:search
                 }
-            }/* else{
-                return{
-                    ...state.countries
-                }
-            } */
+            }
 
         case GET_COUNTRY_BY_ID:
-            const country = actions.payload
+            const filteredById = actions.payload
             return {
-                ...state,detailCountry: country
+                ...state,detailCountry: filteredById
             }
 
         case NEW_ACTIVITY:

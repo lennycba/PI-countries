@@ -74,10 +74,9 @@ export const orderByPop = (orderPop) =>{
 export const searchByName = (search) =>{
 
     return async function (dispatch){
-        const bddInfo = await axios.get(`http://localhost:3001/countries?name=${search}`)
-        const countries = bddInfo.data;
+        let bddInfo = await axios.get(`http://localhost:3001/countries?name=${search}`)
+        let countries = bddInfo?.data;
         dispatch({type:SEARCH_BY_NAME,payload:countries});
-        
     }
 }
 

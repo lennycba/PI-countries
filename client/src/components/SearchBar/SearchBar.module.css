@@ -1,15 +1,14 @@
-
 .searchContainer{
     margin-left: 25px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 500px;
+    width: 550px;
     height: 50px;
     border-radius: 10px;
     font-size: 16px;
-    color: #fff;
-    border: 2px solid rgba(254, 254, 254, 0.423);
+    color: rgb(22, 21, 21);
+    border: 2px solid rgb(138, 80, 3);
     border-radius: 25px;
 }
 
@@ -20,19 +19,26 @@
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
+    font-family: 'Rock Salt', cursive;
     font-weight: bold;
+    color: rgb(4, 4, 4);
 }
 
 .searchContainer input{
     height: 30px;
     border-radius: 5px;
     text-align: center;
-    background-color: rgba(254, 254, 254, 0.83);
-    color: black;
+    background-image: url('../../images/fondos/wood\ 1.jpg');
+    opacity: 0.7;
+    /* background-color: rgba(254, 254, 254, 0.83); */
+    color: rgb(75, 40, 4);
     font-weight: bold;
 }
 
 .searchContainer input::placeholder{
-    color:rgba(0, 0, 0, 0.537)
+    /* color:rgb(7, 7, 7); */
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: rgb(244, 244, 242);
 }

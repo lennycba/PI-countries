@@ -7,7 +7,6 @@ const postActivity = require('../Controllers/postActivities');
 const getActivities = require('../Controllers/getActivities');
 
 
-
 const router = Router();
 
 

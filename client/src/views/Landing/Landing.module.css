@@ -5,14 +5,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f2f2f2;
+    background-color: #000000;
+    background-image: url('https://media4.giphy.com/media/3o7WIB00yXujVt4WEo/giphy.gif?cid=ecf05e47c933pkq8j5mpv77jwesm2pkyrhc31uuuokmghka3&ep=v1_gifs_search&rid=giphy.gif&ct=g');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:left;
+    position: relative;
   }
 
   .title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    right: 25px;
+    width: 40%;
+    height: 30%;
+    font-size: 40px;
+    color: rgb(251, 251, 251);
     margin-bottom: 20px;
+    font-family: 'Marck Script', cursive;
+    
   }
 
   .subtitle {
@@ -21,12 +36,17 @@
   }
 
   .link {
+    position: absolute;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    right: 250px;
+    bottom: 300px;
+    background-color: #fcfcfc;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 25px;
     margin-top: 20px;
+    /* font-family: 'Marck Script', cursive; */
+    font-family: 'Rock Salt', cursive;
   }

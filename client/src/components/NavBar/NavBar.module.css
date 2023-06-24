@@ -1,13 +1,17 @@
 
 .NavContainer{
+    position: fixed;
+    z-index: 50;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 5px auto;
+    margin: 5px 10px;
     width: 98vw;
     height: 75px;
-    background-color: rgba(32, 30, 30, 0.65);
-    border: 2px solid rgba(254, 254, 254, 0.717);
+    background-image: url('../../images/fondos/wood\ 1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 3px solid rgba(84, 49, 3, 0.829);
     border-radius: 25px;
 }
 
@@ -32,27 +36,61 @@
 			
     0% {
         transform: translateX(0);
+
+        z-index: 16;
     }
     10% {
-        transform: translateX(150px);
+        transform: translateX(56px);
+        scale: 1.5;
     }
     20% {
-        transform: translateX(0);
+        transform: translateX(112px);
+        scale: 1.5;
     }
     30% {
-        transform: translateX(0);
+        transform: translateX(168px);
+        scale: 1.5;
     }
     
     40% {
+        transform: translateX(224px);
+        z-index: 16;
+        
+    }
+    50% {
+        transform: translateX(280px);
+        z-index: 16;
+        
+    }
+    60% {
+        transform: translateX(224px);
+    }
+    70% {
+        transform: translateX(168px);
+        scale: .8;
+    }
+    80% {
+        transform: translateX(112px);
+        scale: .8;
+    }
+    90% {
+        transform: translateX(56px);
+        scale: .8;
+    }
+    100% {
         transform: translateX(0);
+        z-index: 1;
+
     }
 }
 
-
 .henry{
-    animation: textAnim 3s linear 4s infinite normal forwards;
+    z-index: 15;
+    font-size: 22px;
+    color: black;
+    font-family: 'Rock Salt', cursive;
+    font-weight: bold;
 }
-
 .earth img{
     width: 45px;
     animation: myAnim 10s linear 4s infinite normal forwards;
@@ -63,18 +101,29 @@
 
 .buttonsContainer{
     display: flex;
+    height: 60px;
     justify-content: space-around;
+    align-items: center;
     width: 20%;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 .link {
-    padding: 10px 20px;
-    background-color: rgba(254, 254, 254, 0.717);
-    color: rgb(17, 17, 17);
+    height: 50px;
+    padding: 5px 10px;
+    /* background-color: rgba(254, 254, 254, 0.717); */
+    background-image: url('../../images/fondos/wood\ 1.jpg');
+    box-shadow: 2px 2px 10px black;
+    color: rgb(209, 204, 204);
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
+    font-family: 'Rock Salt', cursive;
   }
+
+  .link:active{
+    scale: 0.95;
+    opacity: 0.8;
+}

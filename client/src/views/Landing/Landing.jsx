@@ -9,7 +9,13 @@ function Landing() {
   return (
     <div className={style.container} >
         <div className={style.title} >
-        Presentacion del proyecto
+          <div>
+            Bienvenido a Henry Countries...
+          </div>
+          <div>
+            Una aplicacion donde podrás conocer mas acerca de los distintos paises
+            ademas de crear actividades turísticas para cada uno de ellos
+          </div>
         </div>
         <Link className={style.link} to={ROUTES.HOME}>
             Ir al Home
