@@ -10,6 +10,8 @@ import {
     SEARCH_BY_NAME,
     NEW_ACTIVITY,
     GET_COUNTRY_BY_ID,
+    UPDATE_CONT,
+    UPDATE_ACT,
 } from './types';
 
 
@@ -93,5 +95,17 @@ export const getCountryById = (id) =>{
     return async function (dispatch){
             let country =  await axios.get(`http://localhost:3001/countries/${id}`)
             dispatch({type:GET_COUNTRY_BY_ID,payload:country.data})
+    }
+}
+
+export const updateCont = (sCont) =>{
+    return async function (dispatch){
+        dispatch({type:UPDATE_CONT, payload:sCont})
+    }
+}
+
+export const updateAct = (sAct) =>{
+    return async function (dispatch){
+        dispatch({type:UPDATE_ACT, payload:sAct})
     }
 }

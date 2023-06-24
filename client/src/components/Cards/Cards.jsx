@@ -1,30 +1,48 @@
 import Card from "../Card/Card";
 import style from './Cards.module.css';
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from 'react';
-import {filterByContinent,orderByName,orderByPop,filterByActivities,saveSelectionC,saveSelectionA} from '../../redux/actions';
+import { useState,useEffect } from 'react';
+import {filterByContinent,orderByName,orderByPop,filterByActivities,updateCont,updateAct} from '../../redux/actions';
 import left from '../../images/iconos/arrow-left.png'
 import right from '../../images/iconos/arrow-right.png'
 
 const Cards = () => {
-    /* const countries = useSelector((state)=>state.countries) */
     const filteredCountries = useSelector((state) => state.filteredCountries)
     const activities = useSelector((state)=> state.activities)
     const continents = useSelector((state)=> state.continents)
-/*     const sContinent = useSelector((state)=>state.sContinent)
-    const sActivity = useSelector((state)=> state.sActivity) */
+    const sContinent = useSelector((state)=> state.sContinent)
+    const sActivity = useSelector((state)=> state.sActivity)
+
     const [selectedContinent, setSelectedContinent] = useState('')
     const [selectedActivity, setSelectedActivity] = useState('')
     const [orderName,setOrderName] = useState('')
     const [orderPop,setOrderPop] = useState('')
     const [pages,setPages] = useState(1)
     const dispatch = useDispatch();
+
+
+    useEffect(()=>{
+        setSelectedContinent(sContinent)
+        setSelectedActivity(sActivity)
+    },[])
+
+    //resetear filtros ------------------------------------------------------------
+    const handleReset = ()=>{
+        dispatch(filterByContinent('All'))
+        dispatch(updateCont('All'))
+        dispatch(updateAct(''))
+        setSelectedContinent('')
+        setSelectedActivity('')
+        setPages(1)
+    }
+
        
     //filtrar por continente ------------------------------------------------------------
     
     function handleChangeCont(e){
         const value = e.target.value;
         dispatch(filterByContinent(value))
+        dispatch(updateCont(value))
         setSelectedContinent(value)
         setPages(1)
         value === 'All' && setSelectedActivity('')
@@ -36,6 +54,7 @@ const Cards = () => {
     function handleChangeAct(e){
         const value = e.target.value;
         dispatch(filterByActivities(value));
+        dispatch(updateAct(value))
         setSelectedActivity(value);
         setPages(1)
     }
@@ -78,7 +97,10 @@ const Cards = () => {
                 }
             </div> 
             <div className={style.filtersAndOrders} >
-
+            {/* resetear filtros */}
+            <div>
+                <button className={style.rButton} onClick={handleReset}>Reset filters</button>
+            </div>
             {/* filtro por continente */}
             <div className={style.fContinent} >
             <select onChange={handleChangeCont} value={selectedContinent}> 

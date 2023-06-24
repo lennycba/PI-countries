@@ -3,7 +3,7 @@ import style from "./Form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Validation from "./Validation";
-import { addNewActivity } from "../../redux/actions";
+import { addNewActivity} from "../../redux/actions";
 function Form() {
   const dispatch = useDispatch();
 
@@ -14,6 +14,7 @@ function Form() {
     dificulty: " ",
     duration: " ",
     season: " ",
+    countries:[],
   });
 
   const [errors, setErrors] = useState({});
@@ -26,7 +27,6 @@ function Form() {
           (country) => country !== value
         );
         setErrors(Validation(newActivity, postSelectedCountries));
-        /* return prevSelectedCountries.filter((country) => country !== value) */
         return postSelectedCountries;
       } else {
         setErrors(Validation(newActivity, [...prevSelectedCountries, value]));
@@ -46,7 +46,14 @@ function Form() {
       Validation({ ...newActivity, [property]: value }, selectedCountries)
     );
   };
-
+  const activityClean = {
+    name:'',
+    dificulty:'0',
+    duration:'',
+    season:'',
+    countries: [],
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -58,14 +65,18 @@ function Form() {
       countries: selectedCountries,
     };
 
-    if (!Object.values(errors).length && activityCreated.name !== " ") {
+
+    if (!Object.values(errors).length && activityCreated.name !== " " && activityCreated.duration !==" ") {
       window.alert("Activity succesfully created");
       dispatch(addNewActivity(activityCreated));
+      setNewActivity(activityClean)
+      setSelectedCountries([])
     } else {
       window.alert("Upss.. seems you forgot some information");
     }
   };
 
+  
   return (
     <div className={style.totalForm}>
       <div className={style.formContainer}>
@@ -83,6 +94,7 @@ function Form() {
                 <label>Act Name: </label>
                 <br />
                 <input
+                  value={newActivity.name === '' || newActivity.name === " " ? '': newActivity.name}
                   name="name"
                   placeholder="Activity name"
                   onChange={handleChange}
@@ -98,11 +110,12 @@ function Form() {
                 <label>Dificulty: </label>
                 <br />
                 <label>
-                  {newActivity.dificulty !== "" ? newActivity.dificulty : "1"}
+                  {newActivity.dificulty !== '0' && newActivity.dificulty}
                 </label>
                 <br />
                 <input
-                  name="dificulty"
+                value={newActivity.dificulty === '' || newActivity.dificulty === " " ? '0': newActivity.dificulty}
+                name="dificulty"
                   type="range"
                   min="1"
                   max="5"
@@ -115,6 +128,7 @@ function Form() {
                 <label>Duration: </label>
                 <br />
                 <input
+                value={newActivity.duration}
                   name="duration"
                   type="number"
                   placeholder="Hours"
@@ -134,6 +148,7 @@ function Form() {
                 <div className={style.seasonInputs}>
                   <div>
                     <input
+                      checked={newActivity.season === '' || newActivity.season === " " ? false : null}
                       name="season"
                       value="Invierno"
                       onChange={handleChange}
@@ -143,6 +158,7 @@ function Form() {
                   </div>
                   <div>
                     <input
+                      checked={newActivity.season === '' || newActivity.season === " " ? false : null}
                       name="season"
                       value="Otoño"
                       onChange={handleChange}
@@ -152,6 +168,7 @@ function Form() {
                   </div>
                   <div>
                     <input
+                      checked={newActivity.season === '' || newActivity.season === " " ? false : null}
                       name="season"
                       value="Primavera"
                       onChange={handleChange}
@@ -161,6 +178,7 @@ function Form() {
                   </div>
                   <div>
                     <input
+                      checked={newActivity.season === '' || newActivity.season === " " ? false : null}
                       name="season"
                       value="Verano"
                       onChange={handleChange}

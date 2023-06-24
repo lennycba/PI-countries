@@ -30,10 +30,11 @@
     border-radius: 5px;
     text-align: center;
     background-image: url('../../images/fondos/wood\ 1.jpg');
-    opacity: 0.7;
+    /* opacity: 0.7; */
     /* background-color: rgba(254, 254, 254, 0.83); */
-    color: rgb(75, 40, 4);
+    color: rgb(0, 0, 0);
     font-weight: bold;
+    font-size: 15px;
 }
 
 .searchContainer input::placeholder{

@@ -9,6 +9,8 @@ import {
     SEARCH_BY_NAME,
     NEW_ACTIVITY,
     GET_COUNTRY_BY_ID,
+    UPDATE_CONT,
+    UPDATE_ACT,
 } from './types';
 
 
@@ -43,7 +45,7 @@ const rootReducer = ( state = initialState, actions) =>{
             }
         case FILTER_BY_CONTINENT:
                 const continent = actions.payload;
-                if(continent === 'All'){
+                if(continent === 'All' || continent === ''){
                     return {
                         ...state,
                         filteredCountries : [...state.countries]
@@ -127,7 +129,20 @@ const rootReducer = ( state = initialState, actions) =>{
             return {
                 ...state,detailCountry: filteredById
             }
+        
+        case UPDATE_CONT:
+            const sCont = actions.payload
+            
+            return{
+                ...state,sContinent:sCont
+            }
 
+        case UPDATE_ACT:
+            const sAct = actions.payload
+                
+            return{
+                ...state,sActivity:sAct
+            }
         case NEW_ACTIVITY:
             return {...state}
 

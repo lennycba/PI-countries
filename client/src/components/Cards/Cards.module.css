@@ -1,10 +1,9 @@
 
 
 .cardsContainer{
-    margin-top: 100px;
     display:flex;
     flex-direction: column;
-    margin: auto auto;
+    margin: -25px auto;
     align-items: center;
     width: 90%;
     height:100%;
@@ -24,17 +23,45 @@
     font-family: 'Caveat', cursive;
 }
 
+.rButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    cursor: pointer;
+    transition:.3s ease all;
+    background-image: url('../../images/fondos/wood\ 1.jpg');
+    font-family: 'Caveat', cursive;
+    color: rgb(209, 209, 201);
+    font-size: 22px;
+    font-weight:500;
+    border-radius: 15px;
+    margin:-20px 10px;
+    box-shadow: 1px 3px 5px black;
+    border:  2px solid rgb(53, 23, 2);
+}
+
+.rButton:active{
+    scale: 0.95;
+    opacity: 0.8;
+}
+
 .filtersAndOrders select{
+    margin-top: -30px;
     width: 200px;
     height: 30px;
     border-radius: 10px;
     background-image: url('../../images/fondos/wood\ 1.jpg');
-    /* background-color: rgba(220, 151, 14, 0.766); */
     font-size: 22px;
-    font-weight:bold;
+    font-weight:500;
     text-align: center;
     font-family: 'Caveat', cursive;
     color: rgb(209, 209, 201);
+}
+
+.filtersAndOrders option{
+    color: black;
 }
 
 .cards{
@@ -56,7 +83,7 @@
     justify-content: space-around;
     /* background-color: rgba(130, 74, 6, 0.873); */
     background-image: url('../../images/fondos/wood\ 1.jpg');
-    border: 2px solid rgba(183, 147, 100, 0.979);
+    border: 2px solid rgba(39, 18, 2, 0.979);
     border-radius: 15px;
     font-family: 'Caveat', cursive;
 }
@@ -73,11 +100,11 @@
 }
 
 .pagination span{
-    background-color: rgba(225, 210, 181, 0.823);
+    background-color: rgba(185, 166, 129, 0);
     padding: 10px;
     border-radius: 5px;
-    color: rgb(47, 26, 2);
-    font-size: 21px;
+    color: rgb(163, 159, 155);
+    font-size: 25px;
     font-family: 'Caveat', cursive;
     font-weight: bold;
 }
