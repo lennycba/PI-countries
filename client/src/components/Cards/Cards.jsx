@@ -151,13 +151,13 @@ const Cards = () => {
             })
             }
 			</div>
-            <div className={style.pagination}>
+            {filteredCountries.length > 10 && <div className={style.pagination}>
                 <button disabled={pages === 1} onClick={goPrevious}><img src={left}/></button>
                 <span>Page: {pages}</span>
                 {filteredCountries.length? <button disabled={pages === Math.ceil(filteredCountries.length/15)} onClick={goNext}><img src={right}/></button>:
                 <button disabled={pages === Math.ceil(filteredCountries.length/15)} onClick={goNext}><img src={right}/></button>
                 }
-            </div> 
+            </div> }
         </div>
     )
 }

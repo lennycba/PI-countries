@@ -7,11 +7,19 @@ const postActivity = async (req,res)=>{
         console.log(name,dificulty,duration,season,countries)
         if(!name || !dificulty || !duration || !season || !countries)
         {
-            throw Error('faltan datos necesarios para crear la actividad')
+            res.status(208)('faltan datos necesarios para crear la actividad')
         }
-        const newActivity = await Activity.create({name,dificulty,duration,season});
-        newActivity.addCountry(countries);
-        res.status(200).json({message:'actividad creada correctamente'})
+
+        const existingActivity = await Activity.findOne({where:{name}});
+        if (existingActivity) {
+          res.status(208).json({message:'there is already a previously created activity with the same name'});
+
+        }else{
+            const newActivity = await Activity.create({name,dificulty,duration,season});
+            newActivity.addCountry(countries);
+            res.status(200).json({message:'activity successfuly created'})
+        }
+
     } catch (error) {
         res.status(500).json({error:error.message})
     }

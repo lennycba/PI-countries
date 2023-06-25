@@ -10,6 +10,7 @@
     color: rgb(22, 21, 21);
     border: 2px solid rgb(138, 80, 3);
     border-radius: 25px;
+    position: relative;
 }
 
 .label{
@@ -42,4 +43,16 @@
     font-family: 'Caveat', cursive;
     font-size: 20px;
     color: rgb(244, 244, 242);
+}
+
+.errorMessage{
+    position:absolute;
+    width: 200px;
+    height: 40px;
+    left:570px;
+    border: 2px solid rgb(77, 4, 4);
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 15px;
+    font-family: 'Rock Salt', cursive;
 }

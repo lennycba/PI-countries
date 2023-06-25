@@ -18,6 +18,7 @@ const initialState = {
     countries:[],
     activities:[],
 
+    backMessages:{},
     detailCountry:[],
     continents: [],
     filteredCountries: [],
@@ -119,9 +120,12 @@ const rootReducer = ( state = initialState, actions) =>{
         case SEARCH_BY_NAME:
             const search = actions.payload;
             if (search.length){
+                state.backMessages = {}
                 return{
                     ...state,filteredCountries:search
                 }
+            }else{
+                state.backMessages = search
             }
 
         case GET_COUNTRY_BY_ID:

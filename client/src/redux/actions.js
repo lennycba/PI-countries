@@ -85,11 +85,12 @@ export const searchByName = (search) =>{
 
 export const addNewActivity = (newActivity) => {
     return async function (dispatch){
-        await axios.post('http://localhost:3001/activities',newActivity)
+       await axios.post('http://localhost:3001/activities',newActivity)
         dispatch({type:NEW_ACTIVITY});
-    
+            
+        }
     }
-}
+
 
 export const getCountryById = (id) =>{
     return async function (dispatch){

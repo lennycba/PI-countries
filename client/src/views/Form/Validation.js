@@ -1,8 +1,11 @@
 const onlyText =/^[A-Za-z\s]*$/;
 
-export default function Validation (inputs,selectedCountries){
+
+export default function Validation (inputs,selectedCountries,activities){
     const errors = {};
     //validaciones para el nombre
+    const repeated = activities?.find(act => act.name === inputs.name)
+    if (repeated?.name) {errors.name = 'there is a previously created activity with the same name'}
     if(inputs.name.length < 1) {errors.name = 'Name is required'}
     if(inputs.name.length > 27){errors.name = 'Name is too large'}
     if(!onlyText.test(inputs.name)) {errors.name = 'Name only admits words'}
@@ -14,5 +17,6 @@ export default function Validation (inputs,selectedCountries){
 
     //validacion para countries
     if(selectedCountries?.length < 1) {errors.countries = 'you must select at least one country'}
+
     return errors;
 }
