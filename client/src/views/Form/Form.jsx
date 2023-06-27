@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Validation from "./Validation";
 import { addNewActivity, getActivities } from "../../redux/actions";
+import note from "../../images/fondos/postit2.png";
+import noteTitle from "../../images/fondos/postitTitle.png";
+import postTitleBlue from '../../images/fondos/postTitleBlue.png'
 function Form() {
   const dispatch = useDispatch();
 
@@ -18,7 +21,6 @@ function Form() {
     season: " ",
   });
 
-
   const handleCheck = (event) => {
     const value = event.target.value;
     setSelectedCountries((prevSelectedCountries) => {
@@ -26,15 +28,16 @@ function Form() {
         const postSelectedCountries = prevSelectedCountries.filter(
           (country) => country !== value
         );
-        setErrors(Validation(newActivity, postSelectedCountries,activities));
+        setErrors(Validation(newActivity, postSelectedCountries, activities));
         return postSelectedCountries;
       } else {
-        setErrors(Validation(newActivity, [...prevSelectedCountries, value],activities));
+        setErrors(
+          Validation(newActivity, [...prevSelectedCountries, value], activities)
+        );
         return [...prevSelectedCountries, value];
       }
     });
   };
-
 
   const handleChange = (e) => {
     const property = e.target.name;
@@ -44,7 +47,11 @@ function Form() {
       [property]: value,
     });
     setErrors(
-      Validation({ ...newActivity, [property]: value },selectedCountries,activities)
+      Validation(
+        { ...newActivity, [property]: value },
+        selectedCountries,
+        activities
+      )
     );
   };
   const activityClean = {
@@ -66,7 +73,9 @@ function Form() {
     };
 
     if (
-      !Object.values(errors).length && activityCreated.name !== " " && activityCreated.duration !== " "
+      !Object.values(errors).length &&
+      activityCreated.name !== " " &&
+      activityCreated.duration !== " "
     ) {
       dispatch(addNewActivity(activityCreated)).then(() => {
         dispatch(getActivities());
@@ -82,13 +91,17 @@ function Form() {
   return (
     <div className={style.totalForm}>
       <div className={style.formContainer}>
+        <div className={style.noteCont}>
+          <img src={note} />
+        </div>
         <div className={style.formDiv}>
           <div className={style.title}>
             <label>
-              Bienvenido al formulario para crear una nueva actividad
+              Welcome to the form to create a new touristic activity
             </label>
             <br />
-            <label>Por favor complete los datos requeridos</label>
+            <label>please complete the required fields below</label>
+            <img className={style.postTitleBlue} src={postTitleBlue} />
           </div>
           <div className={style.formFields}>
             <form onSubmit={handleSubmit}>
@@ -109,6 +122,9 @@ function Form() {
                   <div className={style.bubble}>
                     {" "}
                     <p>{errors.name}</p>{" "}
+                    <div>
+                        <img className={style.noteTitle} src={noteTitle}/>
+                      </div>
                   </div>
                 )}
               </div>
@@ -120,6 +136,7 @@ function Form() {
                 </label>
                 <br />
                 <input
+                className={style.range}
                   value={
                     newActivity.dificulty === "" ||
                     newActivity.dificulty === " "
@@ -152,6 +169,9 @@ function Form() {
                     <div className={style.bubble}>
                       {" "}
                       <p>{errors.duration}</p>{" "}
+                      <div>
+                        <img className={style.noteTitle} src={noteTitle}/>
+                      </div>
                     </div>
                   )}
               </div>
@@ -223,6 +243,9 @@ function Form() {
                   !errors.duration && (
                     <div className={style.bubble}>
                       <p>{errors.season}</p>
+                      <div>
+                        <img className={style.noteTitle} src={noteTitle}/>
+                      </div>
                     </div>
                   )}
               </div>
@@ -233,23 +256,33 @@ function Form() {
                   <label>{newActivity.countries}</label>
                   <br />
                 </div>
-                <div name="countries" className={style.box}>
-                  {countries?.map((count, index) => {
-                    return (
-                      <div key={index}>
-                        <input
-                          checked={selectedCountries.includes(count.ID)}
-                          value={count.ID}
-                          onChange={handleCheck}
-                          type="checkbox"
-                        />
-                        <span>{count.name}</span>
+                {errors.countries &&
+                  !errors.duration &&
+                  newActivity.season !== " " && (
+                    <div className={style.bubble}>
+                      <p>{errors.countries}</p>
+                      <div>
+                        <img className={style.noteTitle} src={noteTitle}/>
                       </div>
-                    );
-                  })}
-                  
+                    </div>
+                  )}
+                <div name="countries" className={style.box}>
+                  {countries
+                    ?.sort((a, b) => a.name.localeCompare(b.name)) // Ordenar alfabéticamente por el nombre
+                    .map((count, index) => {
+                      return (
+                        <div key={index}>
+                          <input
+                            checked={selectedCountries.includes(count.ID)}
+                            value={count.ID}
+                            onChange={handleCheck}
+                            type="checkbox"
+                          />
+                          <span>{count.name}</span>
+                        </div>
+                      );
+                    })}
                 </div>
-              {errors.countries && !errors.duration && newActivity.season !== " " && (<div className={style.bubble}><p>{errors.countries}</p></div>)}
               </div>
               <button className={style.formButton} type="submit">
                 Crear
