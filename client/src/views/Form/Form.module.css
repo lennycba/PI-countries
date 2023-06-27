@@ -111,6 +111,15 @@
     border-radius: 15px;
 }
 
+.formFields input:valid{
+    background-color: rgb(236, 221, 188);
+}
+
+input[type="number"]:valid {
+    background-color: rgb(236, 221, 188);
+  }
+
+
 .formButton{
     padding: 5px 10px;
     width: 100px;
