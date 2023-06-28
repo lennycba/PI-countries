@@ -75,7 +75,9 @@ function Form() {
     if (
       !Object.values(errors).length &&
       activityCreated.name !== " " &&
-      activityCreated.duration !== " "
+      activityCreated.duration !== " " &&
+      activityCreated.season!== " " &&
+      activityCreated.countries !== []
     ) {
       dispatch(addNewActivity(activityCreated)).then(() => {
         dispatch(getActivities());
