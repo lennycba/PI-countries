@@ -285,7 +285,7 @@ function Form() {
                 </div>
               </div>
               <button className={style.formButton} type="submit">
-                Crear
+                Create
               </button>
             </form>
           </div>
